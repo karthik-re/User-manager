@@ -1,0 +1,143 @@
+openapi: 3.0.0
+info:
+  title: Users API
+  version: 1.0.0
+  description: Users API
+  
+servers:
+  - url: "https://lms-dev.webileapps.io/api/users"
+    description: Live Development Server
+  - url: http://localhost:3510
+    description: Local Development Server
+
+tags:
+  - name: Users
+    description: User API calls
+
+components:
+  securitySchemes:
+    token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "61890767e0fff743b84689e4"
+        email:
+          type: string
+          format: email
+          example: "example@gmail.com"
+        name:
+          type: string
+          example: "John"
+        createdAt:
+          type: string
+          format: datetime
+          example: "2001-01-01T00:00:00.001Z"
+        modifiedAt:
+          type: string
+          format: datetime
+          example: "2001-01-01T00:00:00.001Z"
+    CreateUser:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: "example@gmail.com"
+        password:
+          type: string
+          format: password
+        name:
+          type: string
+          example: "John"
+    UserLogin:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: "example@gmail.com"
+        password:
+          type: string
+          format: password
+  requestBodies:
+    CreateUserRequest:
+      required: true
+      description: Create User
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateUser'
+    LoginUserRequest:
+      required: true
+      description: Login with Credentials
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UserLogin"
+paths:
+  /users:
+    post:
+      tags:
+      - Users
+      summary: Create a new user
+      requestBody:
+        $ref: "#/components/requestBodies/CreateUserRequest"
+      responses:
+        200:
+          description: New Ticket Created
+          content:
+            application/json:
+              example:
+                Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        400:
+          description: Invalid input
+          content:
+            application/json:
+              example:
+                message: Invalid Input Provided
+  /users/login:
+    post:
+      tags:
+      - Users
+      summary: Existing User login
+      requestBody:
+        $ref: '#/components/requestBodies/LoginUserRequest'
+      responses:
+        200: 
+          description: Successful login
+          content:
+            application/json:
+              example:
+                Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        400:
+          description: Invalid Credentials
+          content:
+            application/json:
+              example:
+                message: Email or Password is incorrect
+  /users/me:
+    get:
+      tags:
+      - Users
+      summary: Get your information
+      security:
+      - token: []
+      responses:
+        200:
+          description: Operation successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      
+      
+        
+        
+        

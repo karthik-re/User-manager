@@ -1,0 +1,5 @@
+{
+    "jasmineExplorer.env": {
+        "JWT_SECRET": "Qwerty@1234%&$"
+    }
+}
