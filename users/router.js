@@ -27,7 +27,7 @@ router.get("/me",authMiddleware, async(req, res, next)=>{
     try{
         res.status(200).send(await getUserById(req.user.userId));
     }catch(err){
-        res.status(400).send({ message: err.message });
+        res.status(400).send({ message: err.message }); 
     }
 })
 module.exports = router;
