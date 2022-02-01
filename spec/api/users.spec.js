@@ -46,6 +46,7 @@ describe("User tests", () => {
         expect(response3.statusCode).toBe(200);
         expect(response3.body.user.email).toBe('example@gmail.com');
         expect(response3.body.user.name).toBe('John');
+        
     })
 
     it("should throw unauthorized error for faulty token", async () => {

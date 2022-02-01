@@ -25,9 +25,11 @@ router.post("/login", async (req, res, next) => {
 
 router.get("/me",authMiddleware, async(req, res, next)=>{
     try{
-        res.status(200).send(await getUserById(req.user.userId));
+        res.status(200).send({user: await getUserById(req.user.id)});
     }catch(err){
         res.status(400).send({ message: err.message }); 
     }
 })
+
+
 module.exports = router;

@@ -10,21 +10,20 @@ exports.decodeToken = (token) => {
 }
 
 exports.authMiddleware = (req, res, next) => {
-    const token = req.header['authorization'];
+    const token = req.headers['authorization'];
     if (!token) {
-        return next();
+        next();
     } else {
         const jwtToken = token.split(" ")[1];
 
         try {
             const cracked = exports.decodeToken(jwtToken);
-            const { userId } = cracked;
-            req.user = { userId };
-            return next();
+            //const {userId} = cracked.id;
+            req.user = cracked;
+            console.log(req.user);
+            next();
         } catch (err) {
-            return res.status(401).json({
-                errors: { body: ['Authorization failed', e.message] },
-            });
+            return res.status(401).send({ message: err.message });
         }
     }
 }
