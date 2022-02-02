@@ -12,7 +12,9 @@
                 "<node_internals>/**"
             ],
             "env": {
-                "PORT": "4000"
+                "PORT": "4000",
+                "JWT_SECRET": "Qwerty@1234%&$",
+                "DB_PATH": "users.sqlite3"
             },
             "program": "${workspaceFolder}\\index.js"
         }

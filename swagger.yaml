@@ -7,7 +7,7 @@ info:
 servers:
   - url: "https://lms-dev.webileapps.io/api/users"
     description: Live Development Server
-  - url: http://localhost:3510
+  - url: http://localhost:4000
     description: Local Development Server
 
 tags:

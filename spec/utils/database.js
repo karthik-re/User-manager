@@ -9,5 +9,9 @@ exports.startServer = async ()=>{
 }
 
 exports.stopServer = async ()=>{
-    await database.close();
+    await database.User.destroy({
+        where: {},
+        truncate: true
+    })
+    await database.disconnectDB();
 }

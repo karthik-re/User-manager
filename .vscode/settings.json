@@ -1,5 +1,6 @@
 {
     "jasmineExplorer.env": {
-        "JWT_SECRET": "Qwerty@1234%&$"
+        "JWT_SECRET": "Qwerty@1234%&$",
+        "DB_PATH": "test.sqlite3"
     }
 }

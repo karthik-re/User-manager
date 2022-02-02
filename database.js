@@ -1,8 +1,9 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
+const storage = process.env.DB_PATH || 'db.sqlite3';
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: 'db.sqlite3',
+  storage,
 });
 
 const User = sequelize.define('User', {
@@ -44,6 +45,6 @@ exports.connectToDB = async () => {
   }
 };
 
-async function disconnectDB() {
+exports.disconnectDB = async () =>{
   await sequelize.close();
 }
