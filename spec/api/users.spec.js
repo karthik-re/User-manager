@@ -47,8 +47,8 @@ describe("User tests", () => {
 
         const response3 = await request.get('/users/me').set('Authorization', 'Bearer ' + response2.body.token);
         expect(response3.statusCode).toBe(200);
-        expect(response3.body.user.email).toBe('example2@gmail.com');
-        expect(response3.body.user.name).toBe('Johnny');
+        expect(response3.body.email).toBe('example2@gmail.com');
+        expect(response3.body.name).toBe('Johnny');
         
     })
 
